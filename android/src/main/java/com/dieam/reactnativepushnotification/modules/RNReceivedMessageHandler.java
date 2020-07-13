@@ -43,7 +43,7 @@ public class RNReceivedMessageHandler {
         if (remoteNotification != null) {
             // ^ It's null when message is from GCM
             bundle.putString("title", remoteNotification.getTitle());
-            bundle.putString("message", remoteNotification.getBody());
+            bundle.putString("body", remoteNotification.getBody());
             bundle.putString("sound", remoteNotification.getSound());
             bundle.putString("color", remoteNotification.getColor());
         }
@@ -52,13 +52,13 @@ public class RNReceivedMessageHandler {
 
         // Copy `twi_body` to `message` to support Twilio
         if (notificationData.containsKey("twi_body")) {
-            bundle.putString("message", notificationData.get("twi_body"));
+            bundle.putString("body", notificationData.get("twi_body"));
         }
         JSONObject data = getPushData(notificationData.get("data"));
 
         if (data != null) {
-            if (!bundle.containsKey("message")) {
-                bundle.putString("message", data.optString("alert", null));
+            if (!bundle.containsKey("body")) {
+                bundle.putString("body", data.optString("alert", null));
             }
             if (!bundle.containsKey("title")) {
                 bundle.putString("title", data.optString("title", null));

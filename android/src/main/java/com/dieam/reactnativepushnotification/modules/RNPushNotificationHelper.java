@@ -126,7 +126,7 @@ public class RNPushNotificationHelper {
             return;
         }
 
-        if (bundle.getString("message") == null) {
+        if (bundle.getString("body") == null) {
             Log.e(LOG_TAG, "No message specified for the scheduled notification");
             return;
         }
@@ -204,7 +204,7 @@ public class RNPushNotificationHelper {
                 return;
             }
 
-            if (bundle.getString("message") == null) {
+            if (bundle.getString("body") == null) {
                 // this happens when a 'data' notification is received - we do not synthesize a local notification in this case
                 Log.d(LOG_TAG, "Cannot send to notification centre because there is no 'message' field in: " + bundle);
                 return;
@@ -390,7 +390,7 @@ public class RNPushNotificationHelper {
               notification.setLargeIcon(largeIconBitmap);
             }
 
-            String message = bundle.getString("message");
+            String message = bundle.getString("body");
 
             notification.setContentText(message);
 
@@ -741,7 +741,7 @@ public class RNPushNotificationHelper {
                 WritableMap notificationMap = Arguments.createMap();
 
                 notificationMap.putString("title", notification.getTitle());
-                notificationMap.putString("message", notification.getMessage());
+                notificationMap.putString("body", notification.getMessage());
                 notificationMap.putString("number", notification.getNumber());
                 notificationMap.putDouble("date", notification.getFireDate());
                 notificationMap.putString("id", notification.getId());
